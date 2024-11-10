@@ -1,0 +1,46 @@
+{
+    // "deploy": {
+    //     "packages": [
+    //         {
+    //             "name": "My rpi4py remote Project",
+                
+    //             "deployOnSave": true,
+
+    //             "files": [
+    //                 "**/*.css",
+    //                 "**/*.js",
+    //                 "**/*.py",
+    //                 "**/*.txt"
+    //             ],
+
+    //             "targets": [ "rpi4auth" ] //  targets 를 지정
+    //         }
+    //     ],        
+    //     "targets": [
+    //         {
+    //             "type": "sftp",
+    //             "name": "rpi4",
+    //             "description": "A SFTP folder in rpi4",
+
+    //             "dir": "/home/pi/workspace/rpi4py",
+    //             "host": "rpi4",
+    //             "user": "pi", "password": "qwer1234"
+    //         }
+    //     ],
+        /*        
+        "targets": [
+            {
+                "type": "sftp",
+                "name": "rpi4auth",
+                "description": "SFTP target with key file",
+
+                "dir": "/my_package_files",
+                "host": "localhost",
+
+                "user": "pi",
+                "privateKey": "/.ssh/id_rsa"
+            }
+        ]
+        */
+    }
+}
