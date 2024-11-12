@@ -8,7 +8,7 @@ python httpServer.py --host=localhost --port=10000
 python tcpClient.py  --host=localhost --port=10000
 ```
 ## 3. list env packages
-conda list
+    conda list
 ```bash
 # packages in environment at /home/pi/miniforge3/envs/dev:
 #
