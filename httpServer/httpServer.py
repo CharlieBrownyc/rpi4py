@@ -1,5 +1,6 @@
 import socket
 from select import *
+import argparse
 
 class simple_server:
     
@@ -7,6 +8,15 @@ class simple_server:
         self.bufsize = 1024
         self.counter = 0
     def run(self, ip, port):
+        # Parse command line arguments
+        # host and port are parsed from command line arguments
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--host', type=str, default='localhost', help='IP address')
+        parser.add_argument('--port', type=int, default=10000, help='Port number')
+        args = parser.parse_args()
+        ip = args.host
+        port = args.port
+
         # Create a socket object
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # Bind the socket to an IP address and a port
@@ -38,12 +48,17 @@ class simple_server:
                             print(f"Received: \n{data.decode()}")
                             print(f"--------------------------------------------------------")
                             ipaddr = addr[0]+":"+str(addr[1])
+                            
                             # Construct the response message
                             res_body = '''<html><head><title>simple web server</title>
                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-                            <script>
-                                console.log('javascript');
+                            <script>'''.encode("utf-8")
+                            res_body += f'''
+                                var ip = '{ip}'
+                                var port = {port}
+                                    '''.encode("utf-8")
+                            res_body += '''console.log('javascript');
                                 function btn(){
                                     Swal.fire({
                                         title: "<strong>HTML <u>example</u></strong>",
@@ -85,12 +100,14 @@ class simple_server:
                                 }
                                 // get
                                 function btn_fetch(){
-                                    fetch('http://rpi4:10000/show?time1=value1&time2=value2')
+                                    var url = 'http://'+ip+':'+port+'/show?time1=value1&time2=value2'
+                                    fetch(url)
                                     .then(response => console.log(response))
                                 }
                                 // post
                                 function btn_fetch2(){
-                                    fetch('http://rpi4:10000', {
+                                    var url = 'http://'+ip+':'+port+''
+                                    fetch(url, {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json'
@@ -193,4 +210,4 @@ class simple_server:
         # Close the server socket
         server_socket.close()
 server = simple_server()
-server.run('', 10000)
+server.run('', 0)
