@@ -37,7 +37,9 @@ def logout():
 @app.errorhandler(404)
 @app.route('/<path:path>')
 @app.route('/404')
-
+def page_not_found(path):
+    return render_template('404.html'), 404
+@app.route('/403')
 
     
 #     return '''
