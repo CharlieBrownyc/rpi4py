@@ -25,6 +25,21 @@ def login():
             form.username.data, form.remember_me.data))
         return redirect('index')
     return render_template('login.html', title='Sign In', form=form)
+@app.route('/user/<username>')
+def user(username):
+    user = {'username': username}
+    return render_template('user.html', user=user)
+@app.route('/logout')
+def logout():
+    # Log out user
+    flash('User logged out')
+    return redirect(url_for('index'))
+@app.errorhandler(404)
+@app.route('/<path:path>')
+@app.route('/404')
+
+
+    
 #     return '''
 # <html>
 #     <head>
