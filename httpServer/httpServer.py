@@ -11,7 +11,7 @@ class simple_server:
         # Parse command line arguments
         # host and port are parsed from command line arguments
         parser = argparse.ArgumentParser()
-        parser.add_argument('--host', type=str, default='localhost', help='IP address')
+        parser.add_argument('--host', type=str, default='', help='IP address')
         parser.add_argument('--port', type=int, default=10000, help='Port number')
         args = parser.parse_args()
         ip = args.host
@@ -187,9 +187,9 @@ class simple_server:
                             res_header = "\n".join(res_header).encode("utf-8")            
                             result = res_header + res_body
 
-                            print(f"--------------------------------------------------------")
-                            print(f"Response msg: \n{result}")
-                            print(f"--------------------------------------------------------")
+                            # print(f"--------------------------------------------------------")
+                            # print(f"Response msg: \n{result}")
+                            # print(f"--------------------------------------------------------")
 
                             # Send data back to the client
                             # client_socket.sendall(f"Counter: {self.counter}".encode())
